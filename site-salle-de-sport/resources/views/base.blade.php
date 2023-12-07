@@ -8,18 +8,29 @@
 </head>
 <body>
     <header>
-        <h1> <h1>
+        <h1> Sport 3000 <h1>
     <nav>
 
 <ul>
     <li>
-        <a href="{{ route ('main.home') }}">Acceuil</a>
+        <a href="{{ route ('main.accueil') }}">Acceuil</a>
     </li>
     <li>
-        <a href="{{ route ('main.menu') }}">Menu</a>
+        <a href="{{ route ('main.cours') }}">Cours</a>
     </li>
+    <li>
+        <a href="{{ route ('main.tarifs') }}">Tarifs</a>
+    </li>
+    <li>
+        <a href="{{ route ('main.contact') }}">Contact</a>
+    </li>
+
 </ul>
 </nav>
+<content>   </content>
     </header>
 </body>
+<footer>
+        <a href="{{ route ('main.mmentions-legales') }}">Mentions Légales</a>
+</footer>
 </html>

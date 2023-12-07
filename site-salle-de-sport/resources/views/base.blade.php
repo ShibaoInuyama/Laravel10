@@ -10,27 +10,19 @@
     <header>
         <h1> Sport 3000 <h1>
     <nav>
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li> <a href="{{ route ('main.accueil') }}">Accueil</a></li>
+            <li><a href="{{ route ('main.cours') }}">Cours</a></li>
+            <li><a href="{{ route ('main.tarifs') }}">Tarifs</a></li>
+            <li><a href="{{ route ('main.contact') }}">Contact</a></li>
+        </ul>
+    </nav>
 
-<ul>
-    <li>
-        <a href="{{ route ('main.accueil') }}">Acceuil</a>
-    </li>
-    <li>
-        <a href="{{ route ('main.cours') }}">Cours</a>
-    </li>
-    <li>
-        <a href="{{ route ('main.tarifs') }}">Tarifs</a>
-    </li>
-    <li>
-        <a href="{{ route ('main.contact') }}">Contact</a>
-    </li>
-
-</ul>
-</nav>
-<content>   </content>
     </header>
 </body>
+@yield('content')
 <footer>
-        <a href="{{ route ('main.mmentions-legales') }}">Mentions Légales</a>
+        <a href="{{ route ('main.mentions-legales') }}">Mentions Légales</a>
 </footer>
 </html>

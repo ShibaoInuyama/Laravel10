@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>accueil</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body>
-    
-</body>
-</html>
+@extends('base')
+@section('title', 'Accueil')
+<h2> Accueil</h2>
+    @section('content')
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero eveniet omnis commodi eum dolores possimus asperiores autem quasi numquam facere, vero earum, ipsam deserunt porro laudantium ipsum sequi? Sunt, repellendus!</p>
+    <img src="img/gym1.jpg" alt="salle 1">
+    <img src="img/gym2.jpg" alt="salle 2">
+@endsection

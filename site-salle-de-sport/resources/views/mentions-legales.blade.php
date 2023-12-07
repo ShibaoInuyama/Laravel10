@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mentions-legales</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body>
-    
-</body>
-</html>
+@extends('base')
+@section('title', 'Mentions Légales')
+
+    @section('content')
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur doloribus laudantium totam reprehenderit suscipit neque doloremque qui tempore, non consequuntur hic eos quos, laboriosam quis! Asperiores doloremque quia voluptate illo.</p>
+    @endsection

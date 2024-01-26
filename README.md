@@ -62,7 +62,7 @@ ORDER BY plats.nom
 
 il faut d'abord cloner l'application en local :
 ```
-git clone ????
+git clone ???
 puis il faut configurer les accès dans le dossier ENV
 puis créer une badd et configurer les accès dans le fichier.env
 ```

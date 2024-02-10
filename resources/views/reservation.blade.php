@@ -1,54 +1,71 @@
 @extends ('base')
 
+
+
 @section('content')
+    <section>
 
-
-<section>
-
-    <h2>Réservation</h2>
-    <form action="{{route ('main.reservation.store')}}" method="POST">
-        @csrf  
-        <div>
-            <label for="nom">Nom</label>
-            <input type="text" name="nom" id="nom" min="3" max="50" required>
+        <h2>Réservation</h2>
+      {{--  <div>
+            @foreach ($errors->all() as $error)
+            {{ $error }}
+            @endforeach
         </div>
-        <div>
-            <label for="couverts">Nombre de couverts</label>
-            <input type="number" name="couverts" id="couverts" min="1" max="16">
-        </div>
-        <div>
-            <label for="heure">Heure</label>
-           <select name="heure" id="heure">
-            <option value="">12:00</option>
-            <!-- créneaux du midi-->
-            <option value="12:00:00">12:00</option>
-            <option value="12:30:00">12:30</option>
-            <option value="13:00:00">13:00</option>
-            <option value="13:30:00">13:00</option>
-
-            <!-- créneaux du soir-->
-            <option value="20:00:00">20:00</option>
-            <option value="20:30:00">20:30</option>
-            <option value="21:00:00">21:00</option>
-            <option value="21:30:00">21:30</option>
-           </select>
-        </div>
-        <div>
-            <label for="jour">Jour</label>
-            <input type="date" name="jour" id="jour" required>
-        </div>
-        <div>
-            <label for="telephone">Numéro de téléphone</label>
-            <input type="phone" name="telephone" id="telephone" required>
-        </div>
-        <div>
-            <label for="commentaires">Commentaires</label>
-            <textarea name="" id="commentaires" cols="30" rows="10"></textarea>
-        </div>
-        <div>
-            <button type="submit">Réserver</button>
-        </div>
-    </form>
-</section>
-
+    --}}
+        <form action="{{ route('main.reservation.store') }}" method="POST">
+            @csrf
+            <div>
+                <label for="nom">Nom</label>
+                <input type="text" name="nom" id="nom" min="3" max="50" value="{{ old('nom') }}"
+                    required>
+                @error('nom')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div>
+                <label for="couverts">Nombre de couverts</label>
+                <input type="number" name="couverts" id="couverts" min="1" max="16"
+                    value="{{ old('couverts') }}" required>
+                @error('couverts')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div>
+                <label for="heure">Heure</label>
+                <select name="heure" id="heure" required>
+                    <option value=""></option>
+                    @foreach ($heures as $heure)
+                        <option value="{{ $heure }}"{{old('heure')== $heure ? 'selected': '' }}> {{ $heure }}</option>
+                    @endforeach
+                </select>
+                @error('heure')
+                    <div class="invalid-feedback"->{{ $message }}</div>
+                @enderror
+            </div>
+            <div>
+                <label for="jour">Jour</label>
+                <input type="date" name="jour" id="jour" min="{{ date ('Y-m-d') }}" value="{{ old('jour') }}" required>
+                @error('jour')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div>
+                <label for="telephone">Numéro de téléphone</label>
+                <input type="phone" name="telephone" id="telephone" value="{{ old('telephone') }}" placeholder="exemple : 0612345678" required>
+                @error('telephone')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div>
+                <label for="commentaires">Commentaires</label>
+                <textarea name="commentaires" id="commentaires" cols="30" rows="10">{{ old('commentaires') }}</textarea>
+            </div>
+            @error('commentaires')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+            <div>
+                <button type="submit">Réserver</button>
+            </div>
+        </form>
+    </section>
 @endsection

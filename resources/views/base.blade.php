@@ -12,7 +12,7 @@
 
             <ul>
                 <li>
-                    <a href="{{ route ('main.home') }}">Acceuil</a>
+                    <a href="{{ route ('main.home') }}">Accueil</a>
                 </li>
                 <li>
                     <a href="{{ route ('main.menu') }}">Menu</a>

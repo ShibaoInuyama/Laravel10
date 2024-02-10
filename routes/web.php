@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\AdminReservationController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,12 +17,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
+
+
+
+require __DIR__.'/auth.php';
 
 Route::get('/', [MainController::class, 'home'])->name('main.home');
 
-Route::get('/menu', [MainController::class, 'menu'])->name('main.menu');
+Route::get('/menu', [MainController::class, 'menu'])->name('main.menu'); 
+
+Route::get('/apropos', [MainController::class, 'apropos'])->name('main.apropos');
 
 Route::get('/plat/{id}', [MainController::class, 'plat'])->name('main.plat');
 
@@ -28,6 +36,21 @@ Route::get('/reservation', [MainController::class, 'reservation'])->name('main.r
 
 Route::post('/reservation', [MainController::class, 'reservationStore'])->name('main.reservation.store');
 
-//une route c'est à la fois une url et une fonction.
-//si c'est la même url mais une fonction différente (get, post...) ça fera appel à la bonne fonction
-//en gros la requete fait appel à la class dans le maincontroller. le maincontroller renvoie au navigateur ce qui a été généré par le serveur
+Route::get('/admin/reservation/', [AdminReservationController::class,'Index'])->middleware('auth')->name('admin.reservation.index');
+
+Route::get('/admin/reservation/{id}', [AdminReservationController::class,'show'])->middleware('auth')->name('admin.reservation.show');
+
+Route::get('/admin/reservation/{id}/edit', [AdminReservationController::class,'edit'])->middleware('auth')->name('admin.reservation.edit');
+
+Route::put('/admin/reservation/{id}/', [AdminReservationController::class,'update'])->middleware('auth')->name('admin.reservation.update');
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});

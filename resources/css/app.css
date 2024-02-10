@@ -1,17 +1,23 @@
+
+
 .plats {
-    display:flex;
+    display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
 }
-.plats img{
-    width: 150px;
-    height: auto;
+
+.plats img {
+width: 150px;
+height: auto;
+
 }
 
 .plats h4 {
-    display: inline
+    display: inline;
 }
-body {
-    background: linear-gradient(to bottom right, rgb(243, 243, 243), rgb(255, 200, 50), rgb(198, 50, 50));
- }
+
+body {background-color: rgb(164, 218, 218);}
+
+/* créer backoffice.css pour mettre le tailwind dedans
+pas oublier de git checkout l'app.Css, et le JS et le web.php */

@@ -5,16 +5,30 @@ namespace App\Http\Controllers;
 use App\Models\Actu;
 use App\Models\Categorie;
 use App\Models\Plat;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 
 class Maincontroller extends Controller
-{
+{         
+    private $heures = [
+    // créneaux du midi
+    '12:00:00' => '12:00',
+    '12:30:00' => '12:30',
+    '13:00:00' => '13:00',
+    '13:30:00' => '13:30',
+
+    // créneaux du soir
+    '20:00:00' => '20:00',
+    '20:30:00' => '20:30',
+    '21:00:00' => '21:00',
+    '21:30:00' => '21:30',
+];
     public function home()
     {
+
         $actus = Actu::all();
         return view('home', [
             'actus' => $actus,
-
         ]);
     }
 
@@ -34,16 +48,45 @@ class Maincontroller extends Controller
         ]);
     }
     public function reservation()
-    {
-        return view ('reservation');
+    { 
+        return view ('reservation', [
+        'heures' => $this->heures,
+        ]);
     }
-    
+
     public function reservationStore(Request $request)
     {
-        dd($request);
+$heures = implode (',', $this->heures);
+
+
+$validated = $request->validate ([
+    'nom'=> 'required|min:3|max:50', //2 points représente un égal
+            'couverts' => 'required|numeric|gte:1|lte:16',
+            'heure' => "required|in:{$heures}",
+            'jour' => 'required |date|date_format:Y-m-d|after_or_equal:today',
+            'telephone' => 'required |min:10|max:10',
+            'commentaires' => 'nullable|min:10|max:1000',
+        ]);
+
+        $reservation = new Reservation();
+        $reservation->nom = $validated ['nom'];
+        $reservation->couverts = $validated ['couverts'];
+        $reservation->heure = $validated ['heure'];
+        $reservation->jour = $validated ['jour'];
+        $reservation->telephone = $validated ['telephone'];
+        $reservation->commentaires = $validated ['commentaires'] ?? '';
+
+        $reservation->save();
+        
+        return view('reservationStore', ['reservation' => $reservation,]);
+
     }
+
+
 }
+
 
 //model:outil de communication entre le controller et la bdd.
 //le controller demande au model des données afin de les distribuer aux views
 // dd, dump and die. envoie les données et s'arrête
+
